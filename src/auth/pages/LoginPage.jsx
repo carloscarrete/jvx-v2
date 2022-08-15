@@ -4,28 +4,53 @@ import React from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import AuthLayout from '../layouts/AuthLayout'
 
+import {useForms} from '../../hooks'
+import { useDispatch } from 'react-redux'
+import { checkingAuth, startGoogleSignIn } from '../../store/auth'
+
 const LoginPage = () => {
+
+  const dispatch = useDispatch();
+
+  const [values, handleInputchange] = useForms({
+    email: 'carloscarrete.sc@gmail.com',
+    password: '123Polita'
+  });
+
+  const {email, password} = values;
+
+  const onLogin = (e) => {
+    e.preventDefault();
+    dispatch(checkingAuth());
+    console.log(email, password);
+  }
+
+  const onGoogleLogin = () => {
+    console.log('google login');
+    dispatch(startGoogleSignIn());
+  }
+
   return (
     <AuthLayout title="Iniciar sesión">
-      <form>
+      <form onSubmit={onLogin}>
         <Grid container>
           <Grid item sx={{ mt: 2 }} xs={12}>
-            <TextField label="Correo" placeholder="tucorreo@gmail.com" type="email" fullWidth />
+            <TextField label="Correo" placeholder="tucorreo@gmail.com" type="email" fullWidth name='email' onChange={handleInputchange} value={email}/>
           </Grid>
           <Grid item sx={{ mt: 2 }} xs={12}>
-            <TextField label="Contraseña" placeholder="tu-contraseña" type="password" fullWidth />
+            <TextField label="Contraseña" placeholder="tu-contraseña" type="password" fullWidth name="password" onChange={handleInputchange} value={password}/>
           </Grid>
         </Grid>
 
 
         <Grid container spacing={2} sx={{ mb: 2, mt: 2 }}>
           <Grid item xs={12} sm={6}>
-            <Button variant='contained' fullWidth>
+            <Button variant='contained' fullWidth type="submit">
               Login
             </Button>
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Button variant='contained' fullWidth>
+            <Button variant='contained' fullWidth onClick={onGoogleLogin}>
               <Google />
               <Typography sx={{ ml: 1 }}>Google</Typography>
             </Button>
