@@ -1,14 +1,17 @@
+import { useMemo } from 'react'
 import { Google } from '@mui/icons-material'
 import { Button, Grid, Link, TextField, Typography } from '@mui/material'
 import React from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import AuthLayout from '../layouts/AuthLayout'
 
-import {useForms} from '../../hooks'
-import { useDispatch } from 'react-redux'
+import { useForms } from '../../hooks'
+import { useDispatch, useSelector } from 'react-redux'
 import { checkingAuth, startGoogleSignIn } from '../../store/auth'
 
 const LoginPage = () => {
+
+  const { status } = useSelector(state => state.auth);
 
   const dispatch = useDispatch();
 
@@ -17,7 +20,9 @@ const LoginPage = () => {
     password: '123Polita'
   });
 
-  const {email, password} = values;
+  const isAuthenticated = useMemo(()=> status==='checking', [status]);
+
+  const { email, password } = values;
 
   const onLogin = (e) => {
     e.preventDefault();
@@ -35,22 +40,22 @@ const LoginPage = () => {
       <form onSubmit={onLogin}>
         <Grid container>
           <Grid item sx={{ mt: 2 }} xs={12}>
-            <TextField label="Correo" placeholder="tucorreo@gmail.com" type="email" fullWidth name='email' onChange={handleInputchange} value={email}/>
+            <TextField label="Correo" placeholder="tucorreo@gmail.com" type="email" fullWidth name='email' onChange={handleInputchange} value={email} />
           </Grid>
           <Grid item sx={{ mt: 2 }} xs={12}>
-            <TextField label="Contraseña" placeholder="tu-contraseña" type="password" fullWidth name="password" onChange={handleInputchange} value={password}/>
+            <TextField label="Contraseña" placeholder="tu-contraseña" type="password" fullWidth name="password" onChange={handleInputchange} value={password} />
           </Grid>
         </Grid>
 
 
         <Grid container spacing={2} sx={{ mb: 2, mt: 2 }}>
           <Grid item xs={12} sm={6}>
-            <Button variant='contained' fullWidth type="submit">
+            <Button variant='contained' fullWidth type="submit" disabled={isAuthenticated}>
               Login
             </Button>
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Button variant='contained' fullWidth onClick={onGoogleLogin}>
+            <Button variant='contained' fullWidth onClick={onGoogleLogin} disabled={isAuthenticated}>
               <Google />
               <Typography sx={{ ml: 1 }}>Google</Typography>
             </Button>
