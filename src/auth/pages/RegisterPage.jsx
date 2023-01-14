@@ -44,7 +44,8 @@ const RegisterPage = () => {
 
   return (
     <AuthLayout title="Crear una cuenta">
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit}     className='animae__animated animate__fadeIn animate__faster'
+>
         <Grid container>
           <Grid item sx={{ mt: 2 }} xs={12}>
             <TextField label="Nombre" placeholder="nombre-completo" type="text" fullWidth name="displayName" value={displayName} onChange={handleInputchange} error={!!displayNameValid && formSubmitted} helperText={displayNameValid} />
