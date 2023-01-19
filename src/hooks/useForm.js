@@ -11,6 +11,10 @@ export const useForms = (initialState = {}, formValidations = {}) => {
     }, [values])
 
 
+    useEffect(() => {
+        setValues(initialState);
+    }, [initialState])
+
     const reset = () => {
         setValues(initialState);
     }
