@@ -41,7 +41,6 @@ export const startLoginWithEmailAndPassword = (email,password) =>{
         dispatch(checkingAuth());
         const {displayName, ok, photoURL, uid, errorMessage} = await loginWithEmailAndPassword(email, password);
         if(!ok) return dispatch(logout(errorMessage))
-
         dispatch(login({uid, displayName, email, photoURL}))
         
     }
