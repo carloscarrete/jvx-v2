@@ -30,7 +30,6 @@ export const journalSlice = createSlice({
             state.messageSaved = `${action.payload.title}, se ha actualizado`
             state.notes = state.notes.map((note)=>{
                 if(note.id===action.payload.id){
-                    console.log('Igual...', action.payload)
                     return action.payload;
                 }
                 return note;
@@ -42,9 +41,19 @@ export const journalSlice = createSlice({
         savingNewNote: (state) => {
             state.isSaving = true;
         },
+        imagesUploaded: (state, action) => {
+            state.active.imageUrls = [...state.active.imageUrls, ...action.payload];
+            state.isSaving = false;
+        },
+        logoutClearData: (state)=> {
+            state.isSaving = false;
+            state.messageSaved = '';
+            state.notes = [];
+            state.active = null;
+        }
         
     },
 });
 
-export const { addNewEmptyNote, setActiveNote, setNotes, setSaving, updateNote, deleteNoteById, savingNewNote  } = journalSlice.actions;
+export const { addNewEmptyNote, setActiveNote, setNotes, setSaving, updateNote, deleteNoteById, savingNewNote, imagesUploaded, logoutClearData} = journalSlice.actions;
 
