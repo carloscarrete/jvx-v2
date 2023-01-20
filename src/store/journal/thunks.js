@@ -55,7 +55,7 @@ export const startSaveNote = () =>{
 
         const docRef = doc(FirebaseDB,`${uid}/journal/notes/${active.id}`);
         await setDoc(docRef, noteToFirebase, {merge: true});
-
+        
         dispatch(updateNote(active));
 
     }
