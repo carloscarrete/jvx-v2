@@ -10,8 +10,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { startGoogleSignIn, startLoginWithEmailAndPassword } from '../../store/auth'
 
 const formData = {
-  email: 'carloscarrete.sc@gmail.com',
-  password: '123Polita'
+  email: '',
+  password: ''
 }
 
 const LoginPage = () => {

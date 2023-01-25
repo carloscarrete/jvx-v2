@@ -10,9 +10,9 @@ import { startCreatingWithEmailAndPassword } from '../../store/auth/thunks'
 import AuthLayout from '../layouts/AuthLayout'
 
 const formData = {
-  email: 'carloscarrete.sc@gmail.com',
-  password: '123Polita',
-  displayName: 'carloscarrete'
+  email: '',
+  password: '',
+  displayName: ''
 }
 
 const formValidation = {
