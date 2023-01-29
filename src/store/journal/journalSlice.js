@@ -43,8 +43,14 @@ export const journalSlice = createSlice({
             state.isSaving = true;
         },
         imagesUploaded: (state, action) => {
-            state.active.imageUrls = [...state.active.imageUrls, ...action.payload];
-            state.isSaving = false;
+            if (!state.active) {
+                state.active = {};
+            }
+            if (!state.active.imageUrls) {
+                  state.active.imageUrls = [];
+                }
+                state.active.imageUrls = [...state.active.imageUrls, ...action.payload];
+              state.isSaving = false;
         },
         logoutClearData: (state)=> {
             state.isSaving = false;

@@ -15,7 +15,7 @@ export const NoteView = () => {
 
     const { active, messageSaved, isSaving } = useSelector(state => state.journal);
     const dispatch = useDispatch();
-    
+
     const refFiles = useRef();
 
     const [values, handleInputchange] = useForms(active);
@@ -24,7 +24,8 @@ export const NoteView = () => {
 
     const dateStr = useMemo(() => {
         const newDate = new Date(date)
-        return newDate.toUTCString()}
+        return newDate.toUTCString()
+    }
         , [date])
 
     useEffect(() => {
@@ -32,17 +33,17 @@ export const NoteView = () => {
     }, [values])
 
     useEffect(() => {
-        if(messageSaved.length>0){
+        if (messageSaved.length > 0) {
             Swal.fire('Su nota ha sido actualizada', messageSaved, 'success');
         }
     }, [messageSaved])
-    
+
     const onSaveNote = () => {
         dispatch(startSaveNote())
     };
 
-    const onFileInputChange = ({target}) => {
-        if(target.files===0) return;
+    const onFileInputChange = ({ target }) => {
+        if (target.files === 0) return;
         dispatch(startUploadingFiles(target.files));
     };
 
@@ -57,9 +58,9 @@ export const NoteView = () => {
             </Grid>
             <Grid item>
 
-                <input type="file" multiple onChange={onFileInputChange} style={{display:'none'}} ref={refFiles} />
+                <input type="file" multiple onChange={onFileInputChange} style={{ display: 'none' }} ref={refFiles} />
 
-                <IconButton color="primary" disabled={isSaving} onClick={()=>refFiles.current.click()} >
+                <IconButton color="primary" disabled={isSaving} onClick={() => refFiles.current.click()} >
                     <UploadOutlined />
                 </IconButton>
 
@@ -97,7 +98,7 @@ export const NoteView = () => {
             <Grid container justifyContent='end'>
                 <Button
                     onClick={onDelete}
-                    sx={{mt:2}}
+                    sx={{ mt: 2 }}
                     color="error"
                 >
                     <DeleteOutline />
@@ -106,7 +107,9 @@ export const NoteView = () => {
             </Grid>
 
             {/* Image Gallery */}
-            <ImageGallery images={active.imageUrls}/>
+             {
+                active.imageUrls &&  <ImageGallery images={active.imageUrls} />
+            }  
         </Grid>
     )
 }
