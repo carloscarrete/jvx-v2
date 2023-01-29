@@ -18,7 +18,7 @@ export const authSlice = createSlice({
       state.uid =  payload.uid;
       state.email = payload.email;
       state.displayName = payload.displayName;
-      state.photoUrl = payload.photoURL;
+      state.photoUrl = payload.photoUrl;
       state.errorMessage = null;
     },
     logout: (state, {payload}) => {
@@ -27,7 +27,7 @@ export const authSlice = createSlice({
       state.email = null;
       state.displayName = null;
       state.photoUrl = null;
-      state.errorMessage = payload;
+      state.errorMessage = payload || null;
     },
     checkAuth: (state, action) => {
       state.status = 'checking'

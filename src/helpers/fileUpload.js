@@ -3,7 +3,8 @@ export const fileUpload = async  (file) => {
 
     const urlCloud = 'https://api.cloudinary.com/v1_1/dhvzckunv/upload';
 
-    if(!file) throw new Error('No se ha seleccionado ninguna imágen');
+    //if(!file) throw new Error('No se ha seleccionado ninguna imágen');
+    if (!file) return null;
 
     const formData = new FormData();
     formData.append('upload_preset', 'react-rtx');
@@ -22,8 +23,9 @@ export const fileUpload = async  (file) => {
         return imageResponse.secure_url;
 
     }catch(error){
-        console.log(error)
-        throw new Error(error.message);
+        //console.log(error)
+        //throw new Error(error.message);
+        return null;
     }
 
 }
