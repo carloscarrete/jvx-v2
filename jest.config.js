@@ -3,7 +3,7 @@ module.exports = {
     setupFiles: ['./jest.setup.js'],
     testPathIgnorePatterns: [
         '/node_modules/',
-        '<rootDir>/__tests__/fixtures/authFixtures.js',
+        '<rootDir>/__tests__/fixtures/',
     ],
     transformIgnorePatterns: [],
 }

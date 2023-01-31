@@ -32,7 +32,6 @@ const LoginPage = () => {
   }
 
   const onGoogleLogin = () => {
-    console.log('google login');
     dispatch(startGoogleSignIn());
   }
 
