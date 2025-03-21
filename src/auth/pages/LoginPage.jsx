@@ -16,13 +16,13 @@ const formData = {
 
 const LoginPage = () => {
 
-  const { status, errorMessage} = useSelector(state => state.auth);
+  const { status, errorMessage } = useSelector(state => state.auth);
 
   const dispatch = useDispatch();
 
   const [values, handleInputchange] = useForms(formData);
 
-  const isAuthenticated = useMemo(()=> status==='checking', [status]);
+  const isAuthenticated = useMemo(() => status === 'checking', [status]);
 
   const { email, password } = values;
 
@@ -35,15 +35,19 @@ const LoginPage = () => {
     dispatch(startGoogleSignIn());
   }
 
+  const loginTestUser = () => {
+    dispatch(startLoginWithEmailAndPassword('usuario@prueba.com', '12345678'));
+  }
+
   return (
     <AuthLayout title="Iniciar sesión">
-      <form onSubmit={onLogin}>
+      <form aria-label='submit-form' onSubmit={onLogin}>
         <Grid container>
           <Grid item sx={{ mt: 2 }} xs={12}>
             <TextField label="Correo" placeholder="tucorreo@gmail.com" type="email" fullWidth name='email' onChange={handleInputchange} value={email} />
           </Grid>
           <Grid item sx={{ mt: 2 }} xs={12}>
-            <TextField label="Contraseña" placeholder="tu-contraseña" type="password" fullWidth name="password" onChange={handleInputchange} value={password} />
+            <TextField label="Contraseña" placeholder="tu-contraseña" type="password" fullWidth name="password" onChange={handleInputchange} value={password} inputProps={{ 'data-testid': 'password' }} />
           </Grid>
         </Grid>
 
@@ -63,17 +67,32 @@ const LoginPage = () => {
             </Button>
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Button variant='contained' fullWidth onClick={onGoogleLogin} disabled={isAuthenticated}>
+            <Button aria-label='google-btn' variant='contained' fullWidth onClick={onGoogleLogin} disabled={isAuthenticated} >
               <Google />
               <Typography sx={{ ml: 1 }}>Google</Typography>
             </Button>
           </Grid>
         </Grid>
 
-        <Grid container direction="row" justifyContent='end'>
+        <Grid spacing={2} >
+          {/* <Button variant='outlined' size='small' onClick={loginTestUser}>
+            Ingresar como invitado
+          </Button> */}
+          <Grid xs={12}>
+            <Button xs={2} variant='outlined' size='small' onClick={loginTestUser} fullWidth={true}>
+              Ingresar como invitado
+            </Button>
+          </Grid>
+        </Grid>
+
+        <Grid container direction="row" justifyContent='center' alignItems='center' sx={{ display: 'flex', gap: 2, mt: 1 }}>
           <Link component={RouterLink} to='/auth/register' color='inherit'>
             Crear una cuenta
           </Link>
+          {/*  <Button variant='outlined' size='small' onClick={loginTestUser}>
+            Ingresar como invitado
+          </Button> */}
+
         </Grid>
 
       </form>
