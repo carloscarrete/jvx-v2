@@ -28,7 +28,7 @@ Journal Notebook | JVX2 es una aplicación web que te permite llevar un diario p
    git clone https://github.com/carloscarrete/jvx-v2.git
 2.  Navega al directorio del proyecto:
 
-	    cd carloscarrete-jvx-v2
+	    cd jvx-v2
     
 3.  Instala las dependencias:
 
